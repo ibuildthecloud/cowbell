@@ -26,8 +26,8 @@ func NewRouter(s *Server, token string) *mux.Router {
 	router.Methods("POST").Path("/" + token + "/scale/{stack}/{service}/{scale}").Handler(f(s.Scale))
 	router.Methods("POST").Path("/" + token + "/upgrade/{stack}").Handler(f(s.Upgrade))
 	router.Methods("POST").Path("/" + token + "/upgrade/{stack}/{service}").Handler(f(s.Upgrade))
-	router.Methods("POST").Path("/" + token + "/reploy/{stack}").Handler(f(s.Redeploy))
-	router.Methods("POST").Path("/" + token + "/reploy/{stack}/{service}").Handler(f(s.Redeploy))
+	router.Methods("POST").Path("/" + token + "/redeploy/{stack}").Handler(f(s.Redeploy))
+	router.Methods("POST").Path("/" + token + "/redeploy/{stack}/{service}").Handler(f(s.Redeploy))
 
 	return router
 }

@@ -67,7 +67,7 @@ func (c *Compose) Upgrade(stack, service, dockerComposeURL, rancherComposeURL st
 		return err
 	}
 
-	args := []string{"-p", stack, "upgrade", "-u", "-c", "-p"}
+	args := []string{"-p", stack, "up", "-d", "-u", "-c", "-p"}
 	if service != "" {
 		args = append(args, service)
 	}
@@ -80,7 +80,7 @@ func (c *Compose) Redeploy(stack, service string) error {
 		return err
 	}
 
-	args := []string{"-p", stack, "upgrade", "--force-upgrade", "-c", "-p"}
+	args := []string{"-p", stack, "up", "-d", "--force-upgrade", "-c", "-p"}
 	if service != "" {
 		args = append(args, service)
 	}

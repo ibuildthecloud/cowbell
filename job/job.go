@@ -2,6 +2,7 @@ package job
 
 import (
 	"bytes"
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -147,10 +148,12 @@ func (j *Job) doRun(args ...string) (*exec.Cmd, error) {
 	}
 
 	j.output = &bytes.Buffer{}
+	tee := io.MultiWriter(j.output, os.Stdout)
 	cmd := exec.Command("rancher-compose", args...)
 	cmd.Dir = j.Dir
-	cmd.Stdout = j.output
-	cmd.Stderr = j.output
+	cmd.Stdout = tee
+	cmd.Stderr = tee
+	logrus.Infof("Running in %s command %s %v", cmd.Dir, cmd.Path, cmd.Args)
 	return cmd, cmd.Start()
 }
 

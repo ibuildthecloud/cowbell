@@ -21,6 +21,10 @@ func main() {
 	accessKey := os.Getenv("CATTLE_ACCESS_KEY")
 	secretKey := os.Getenv("CATTLE_SECRET_KEY")
 
+	os.Setenv("RANCHER_URL", url)
+	os.Setenv("RANCHER_ACCESS_KEY", accessKey)
+	os.Setenv("RANCHER_SECRET_KEY", secretKey)
+
 	if listen == "" {
 		listen = ":8080"
 	}
