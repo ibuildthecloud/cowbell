@@ -12,6 +12,5 @@
     - variable: "port"
       type: int
       required: true
-      default: 8080
       label: "Public Port"
       description: "The public port the service will listen on."
