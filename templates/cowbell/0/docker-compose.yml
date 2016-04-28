@@ -1,0 +1,9 @@
+cowbell:
+  image: ibuildthecloud/cowbell:dev
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  environment:
+    TOKEN: ${token}
+  ports:
+  - ${port}:8080

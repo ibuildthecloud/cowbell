@@ -1,0 +1,17 @@
+.catalog:
+  name: "Cowbell"
+  version: 0.0.1
+  description: |
+    Webhook Receivers for Rancher
+  questions:
+    - variable: "token"
+      type: string
+      required: true
+      label: "Random Token"
+      description: "This should be some fairly unique string that nobody can guess."
+    - variable: "port"
+      type: int
+      required: true
+      default: 8080
+      label: "Public Port"
+      description: "The public port the service will listen on."

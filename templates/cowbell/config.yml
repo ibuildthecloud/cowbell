@@ -1,0 +1,5 @@
+name: Cowbell
+description: |
+    Webhook Receivers for Rancher
+version: 0.0.1
+category: Continuous Integration
