@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+source $(dirname $0)/version
+
+cd $(dirname $0)/../package
+
+TAG=${TAG:-${VERSION}}
+REPO=${REPO:-rancher}
+
+cp ../bin/compose-hooks .
+docker build -t ${REPO}/compose-hooks:${TAG} .
+
+echo Built ${REPO}/compose-hooks:${TAG}
