@@ -2,12 +2,27 @@ package server
 
 import (
 	"net/http"
+	"sort"
 	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/rancher/cowbell/compose"
 	"github.com/rancher/cowbell/job"
 )
+
+type jobSorter []*job.Job
+
+func (js jobSorter) Len() int {
+	return len(js)
+}
+
+func (js jobSorter) Swap(i, j int) {
+	js[i], js[j] = js[j], js[i]
+}
+
+func (js jobSorter) Less(i, j int) bool {
+	return js[i].ID < js[j].ID
+}
 
 type Server struct {
 	jm *job.Manager
@@ -26,8 +41,10 @@ func (s *Server) Info(rw http.ResponseWriter, req *http.Request) error {
 }
 
 func (s *Server) ListJobs(rw http.ResponseWriter, req *http.Request) error {
-	return infoTemplate.Execute(rw, map[string]interface{}{
-		"jobs": s.jm.ListJobs(),
+	jobs := s.jm.ListJobs()
+	sort.Sort(jobSorter(jobs))
+	return listTemplate.Execute(rw, map[string]interface{}{
+		"jobs": jobs,
 	})
 }
 
